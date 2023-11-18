@@ -37,10 +37,10 @@
 
         // (6) Jika terdapat kesalahan, buatkan eksekusi query gagalnya 
         else {
-            echo "<script>alert('Data GAGAL ditambahkan')</script>";
+            echo "<script>alert('Data GAGAL ditambahkan: " . mysqli_error($conn)."')</script>";
             echo "<meta http-equiv='refresh' content='1 url=form_create_mobil.php'>";     
         }
-    };  
+    }
 // (7) Tutup koneksi ke database setelah selesai menggunakan database
     mysqli_close($conn);
 ?>
