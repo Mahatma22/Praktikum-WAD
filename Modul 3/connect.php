@@ -8,6 +8,6 @@
   
 // Buatlah perkondisian jika tidak bisa terkoneksi ke database maka akan mengeluarkan errornya
 	if (!$conn)
-		die ("Anda belum terkoneksi...");
+		die ("Anda belum terkoneksi..." . mysqli_connect_error());
 // 
 ?>
