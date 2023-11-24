@@ -37,8 +37,8 @@ session_start();
 
     // b. Buat lagi perkondisian atau percabangan ketika query insert berhasil dilakukan
         if ($insert) {
-            $_SESSION['message'] = "SUKSES DAFTAR!!!";
-            $_SESSION['color'] = "succes";
+            $_SESSION['message'] = "Pendaftaran berhasil, silakan login";
+            $_SESSION['color'] = "success";
             header('Location: ../views/login.php');
         }
         else {
@@ -51,8 +51,9 @@ session_start();
 // (5) Buat juga kondisi else
 //     Buat di dalamnya variabel session dengan key message untuk menampilkan pesan error karena data email sudah terdaftar
     else {
-        $_SESSION['message'] = 'email sudah terdaftar';
-        header('Location: ../views/register');
+        $_SESSION['message'] = 'Email sudah terdaftar';
+        $_SESSION['color'] = "danger";
+        header('Location: ../views/register.php');
     }
 //
 
