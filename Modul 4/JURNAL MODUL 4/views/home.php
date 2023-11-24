@@ -10,13 +10,18 @@ if (!isset($_SESSION['login'])) {
 
 // (1) Buat variabel untuk menampung id user berdasarkan session dengan key id
 //     Kemudian lakukan query untuk mencari id user menggunakan variabel yang sudah dibuat
+    $id = $_SESSION['id'];
+    $query = "SELECT * FROM users WHERE id = '$id'";
+    $hasil = mysqli_query ($conn, $query);
 
 // 
 
 // (2) Buatlah perkondisian ketika id ditemukan ( gunakan mysqli_num_rows == 1 )
+    if (mysqli_num_rows($hasil)==1) {
 
     // a. Simpan hasil query menjadi array asosiatif menggunakan fungsi mysqli_fetch_assoc dalam variabel $data
-
+        $data = mysqli_fetch_assoc ($hasil);
+    }
     // 
 
 // 
