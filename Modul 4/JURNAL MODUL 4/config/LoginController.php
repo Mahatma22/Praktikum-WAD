@@ -3,7 +3,8 @@
 require 'connect.php';
 
 // function untuk melakukan login
-function login($input) {
+function login($input)
+{
 
     // (1) Panggil variabel global $db dari file config
     global $conn;
@@ -35,34 +36,33 @@ function login($input) {
             
             // c. Set variabel session dengan key login untuk menyimpan status login
                 $_SESSION['login'] = true;
-                $_SESSION['email'] = $data['email'];
             
             // d. Set variabel session dengan key id untuk menyimpan id user
-                $_SESSION['login'] = true;
                 $_SESSION['id'] = $data['id'];
-                }
-
-            else{
-                $_SESSION['message'] = 'password salah';
-                $_SESSION['color'] = 'danger';
+                
             }
-            
-        }
             // e. Buat kondisi untuk mengecek apakah checkbox "remember me" terisi kemudian set cookie dan isi dengan id
-            if (isset($input['remember'])) {
-                setcookie("id", $data['id'], time() + 3600);
-            }
-
+                if (isset($input['remember'])) {
+                    setcookie("id", $data['id'], time() + 3600);
+                }
+            
             // 
         // f. Buat kondisi else dan isi dengan variabel session dengan key message untuk meanmpilkan pesan error ketika password tidak sesuai
         
-        // 
+            else {
+                $_SESSION['message'] = 'Password salah';
+                $_SESSION['color'] = 'danger';
+            }
+        }
     // 
 
     // (5) Buat kondisi else, kemudian di dalamnya
     //     Buat variabel session dengan key message untuk menampilkan pesan error ketika email tidak ditemukan
     
-    // 
+        else {
+            $_SESSION['message'] = "Email tidak ditemukan";
+            $_SESSION['color'] = "danger";
+        }
 }
 // 
 
@@ -86,7 +86,7 @@ function rememberMe($cookie)
     // 
 
     // (9) Buatlah perkondisian ketika id ditemukan ( gunakan mysqli_num_rows == 1 )
-    if (mysqli_num_rows($hasil)==1) {}
+    if (mysqli_num_rows($hasil)==1) {
 
         // a. Simpan hasil query menjadi array asosiatif menggunakan fungsi mysqli_fetch_assoc
         $data = mysqli_fetch_assoc ($hasil);
@@ -96,7 +96,7 @@ function rememberMe($cookie)
         
         // c. Set variabel session dengan key id untuk menyimpan id user
         $_SESSION['id'] = $data['id'];
-    
+    }
     // 
 }
 // 
